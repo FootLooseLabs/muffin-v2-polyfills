@@ -1,0 +1,17 @@
+{
+  "name": "muffin-v2-polyfills",
+  "version": "1.0.0",
+  "description": "Companion extensions for atom-websdk v2.x projects.",
+  "browser": "dist/v2-polyfills.min.js",
+  "scripts": {
+    "build": "NODE_ENV=production rollup -c",
+    "build:dev": "rollup -c"
+  },
+  "devDependencies": {
+    "rollup": "^4.0.0",
+    "@rollup/plugin-terser": "^0.4.0",
+    "@rollup/plugin-replace": "^5.0.0"
+  },
+  "type": "module",
+  "license": "Copyright © Footloose Labs INC."
+}
