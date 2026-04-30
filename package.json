@@ -1,6 +1,6 @@
 {
   "name": "muffin-v2-polyfills",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Companion extensions for atom-websdk v2.x projects.",
   "browser": "dist/v2-polyfills.min.js",
   "scripts": {

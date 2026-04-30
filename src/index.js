@@ -232,13 +232,8 @@
     };
 
     proto.initSubscriptions = function (subscriptionsArr) {
-        return Promise.all(subscriptionsArr.map(function (sub) {
-            return Muffin.WebInterface.subscribe(
-                sub.host + '|||' + sub.interface,
-                this.interface.name,
-                sub.localInterfaceEvent
-            );
-        }, this));
+        console.warn('muffin-v2-polyfills: initSubscriptions is not supported in v3 (Muffin.WebInterface was removed). This call is a no-op.');
+        return Promise.resolve([]);
     };
 
     proto.copyToClipboard = function (srcEl) {
@@ -250,7 +245,7 @@
         duration = duration || 4000;
         interfaceSuffix = interfaceSuffix || ':::notify-foreground';
         var text = (msgTxt instanceof HTMLElement) ? msgTxt.dataset.msg : msgTxt;
-        PostOffice.publishToInterface('NotificationManager' + interfaceSuffix, {
+        Muffin.PostOffice.publishToInterface('NotificationManager' + interfaceSuffix, {
             msgTxt: text,
             duration: duration
         });
@@ -263,7 +258,7 @@
         if (!this._notifyDebounceTimer) this._notifyDebounceTimer = null;
         clearTimeout(this._notifyDebounceTimer);
         this._notifyDebounceTimer = setTimeout(function () {
-            PostOffice.publishToInterface('NotificationManager' + interfaceSuffix, {
+            Muffin.PostOffice.publishToInterface('NotificationManager' + interfaceSuffix, {
                 msgTxt: msgTxt, duration: duration
             });
         }, delay);
@@ -427,7 +422,7 @@
                 var attr = srcEl.attributes[i];
                 if (attr.name.startsWith('event-')) payload.params[attr.name.slice(6)] = attr.value;
             }
-            if (payload.target) PostOffice.sockets.global.dispatchMessage('goto-route-event', payload);
+            if (payload.target) Muffin.PostOffice.sockets.global.dispatchMessage('goto-route-event', payload);
         } else {
             var routeParams = srcEl.getAttribute('route-params');
             Muffin._router.go(target, routeParams);
